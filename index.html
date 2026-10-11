@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mathe-Check: Geraden im Koordinatensystem</title>
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['\\(', '\\)']] },
+      options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <style>
+    :root{--blue:#1d4ed8;--blue-dark:#1e40af;--bg:#f1f5f9;--text:#1e293b;--border:#cbd5e1;--green:#dcfce7;--green-border:#22c55e;--red:#fee2e2;--red-border:#ef4444}
+    *{box-sizing:border-box}
+    body{margin:0;padding:20px 12px;background:var(--bg);color:var(--text);font:16px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif}
+    .container{max-width:820px;margin:auto}
+    header,.card,#summary-card{background:#fff;border-radius:12px;box-shadow:0 2px 6px #0000000d}
+    header{padding:24px;text-align:center;margin-bottom:22px}
+    h1{font-size:1.6rem;line-height:1.25;color:var(--blue);margin:0 0 8px}
+    .subtitle{margin:0;color:#64748b}
+    .card{padding:20px 22px;margin-bottom:18px;border:1px solid var(--border)}
+    .card-header{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-bottom:9px;margin-bottom:12px;border-bottom:1px solid #e2e8f0}
+    .card-title{font-size:1.05rem;font-weight:700}
+    .card-tag{flex:none;background:#e0e7ff;color:var(--blue);padding:3px 8px;border-radius:6px;font-size:.72rem;font-weight:700;text-transform:uppercase}
+    .question-text{margin:0 0 14px}
+    .math{display:inline-block;padding-inline:.16em;white-space:nowrap}
+    .options-list{display:flex;flex-direction:column;gap:9px}
+    .option-label{display:flex;align-items:flex-start;gap:10px;padding:11px 14px;border:1px solid var(--border);border-radius:8px;background:#fff;cursor:pointer}
+    .option-label:hover{background:#f8fafc;border-color:#94a3b8}
+    .option-label input{width:18px;height:18px;margin:3px 0 0;accent-color:var(--blue);flex:none}
+    .input-wrapper{margin-top:10px}
+    .text-input-field{width:100%;max-width:280px;padding:11px 14px;font-size:1.2rem;border:2px solid var(--border);border-radius:8px;background:#fff}
+    .virtual-keyboard{display:grid;grid-template-columns:repeat(5,1fr);gap:7px;max-width:320px;margin-top:12px;padding:9px;background:#f8fafc;border:1px solid var(--border);border-radius:8px}
+    .key-btn{padding:10px 0;font-size:1.1rem;font-weight:600;background:white;border:1px solid var(--border);border-radius:6px;cursor:pointer}
+    .key-btn.action{background:#e2e8f0}
+    .feedback-box{display:none;margin-top:13px;padding:11px 14px;border-radius:8px}
+    .feedback-box.correct{display:block;background:var(--green);border:1px solid var(--green-border);color:#14532d}
+    .feedback-box.incorrect{display:block;background:var(--red);border:1px solid var(--red-border);color:#7f1d1d}
+    .actions{display:flex;justify-content:center;flex-wrap:wrap;gap:12px;margin:28px 0 38px}
+    button{font:inherit}
+    .btn-main,.btn-secondary{padding:12px 22px;border-radius:8px;font-weight:700;cursor:pointer}
+    .btn-main{color:#fff;background:var(--blue);border:0}.btn-main:hover{background:var(--blue-dark)}
+    .btn-secondary{color:#475569;background:#fff;border:1px solid var(--border)}
+    #summary-card{display:none;text-align:center;padding:22px;margin-bottom:20px;border:2px solid var(--blue)}
+    #summary-score{font-size:2rem;font-weight:800;color:var(--blue);margin:8px 0}
+    @media(max-width:540px){body{padding:12px 8px}.card{padding:16px}.card-header{align-items:flex-start;flex-direction:column;gap:5px}.option-label{padding:10px}.math{padding-inline:.12em}}
+  </style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>Mathe-Check: Geraden im Koordinatensystem</h1>
+    <p class="subtitle">Sonderfälle, Parallelität, Orthogonalität und Parallelenscharen · 9. Klasse</p>
+  </header>
+  <section id="summary-card" aria-live="polite"><h2>Auswertung</h2><div id="summary-score">0 / 10 Punkte</div><p id="summary-text"></p></section>
+  <form id="quiz-form">
+    <section class="card">
+      <div class="card-header"><span class="card-title">Aufgabe 1: Sonderfälle erkennen</span><span class="card-tag">Multiple Choice</span></div>
+      <p class="question-text">Welche Geradengleichung beschreibt eine Ursprungsgerade?</p>
+      <div class="options-list">
+        <label class="option-label"><input type="radio" name="q1" value="A"><span><span class="math">\(y=4x\)</span></span></label>
+        <label class="option-label"><input type="radio" name="q1" value="B"><span><span class="math">\(y=3x+1\)</span></span></label>
+        <label class="option-label"><input type="radio" name="q1" value="C"><span><span class="math">\(x=5\)</span></span></label>
+        <label class="option-label"><input type="radio" name="q1" value="D"><span><span class="math">\(y=5\)</span></span></label>
+      </div><div class="feedback-box" id="feedback-q1"></div>
+    </section>
+    <section class="card">
+      <div class="card-header"><span class="card-title">Aufgabe 2: Parallelen zur y-Achse</span><span class="card-tag">Multiple Choice</span></div>
+      <p class="question-text">Gegeben ist die Gerade mit der Gleichung <span class="math">\(x=3\)</span>. Welche Aussage trifft zu?</p>
+      <div class="options-list">
+        <label class="option-label"><input type="radio" name="q2" value="A"><span>Die Gerade verläuft parallel zur x-Achse und hat die Steigung <span class="math">\(m=0\)</span>.</span></label>
+        <label class="option-label"><input type="radio" name="q2" value="B"><span>Die Gerade verläuft parallel zur y-Achse. Sie ist keine Funktion.</span></label>
+        <label class="option-label"><input type="radio" name="q2" value="C"><span>Die Gerade ist eine Ursprungsgerade mit <span class="math">\(t=3\)</span>.</span></label>
+        <label class="option-label"><input type="radio" name="q2" value="D"><span>Die Gerade ist eine lineare Funktion mit Steigung <span class="math">\(m=3\)</span>.</span></label>
+      </div><div class="feedback-box" id="feedback-q2"></div>
+    </section>
+    <section class="card">
+      <div class="card-header"><span class="card-title">Aufgabe 3: Parallele Geraden</span><span class="card-tag">Ja / Nein</span></div>
+      <p class="question-text">Sind die Geraden <span class="math">\(g_1:y=0{,}2x+4\)</span> und <span class="math">\(g_2:y=\frac{1}{5}x+7\)</span> parallel?</p>
+      <div class="options-list"><label class="option-label"><input type="radio" name="q3" value="ja"><span>Ja</span></label><label class="option-label"><input type="radio" name="q3" value="nein"><span>Nein</span></label></div><div class="feedback-box" id="feedback-q3"></div>
+    </section>
+    <section class="card">
+      <div class="card-header"><span class="card-title">Aufgabe 4: Waagrechte Geraden</span><span class="card-tag">Zahleneingabe</span></div>
+      <p class="question-text">Welche Steigung <span class="math">\(m\)</span> besitzt jede Parallele zur x-Achse, zum Beispiel <span class="math">\(y=5\)</span>? Gib nur die Zahl ein.</p>
+      <div class="input-wrapper"><input id="input-q4" class="text-input-field" readonly aria-label="Antwort Aufgabe 4" placeholder="Klicke die Tasten …"><div class="virtual-keyboard" data-target="input-q4"></div></div><div class="feedback-box" id="feedback-q4"></div>
+    </section>
+    <section class="card">
+      <div class="card-header"><span class="card-title">Aufgabe 5: Orthogonale Steigung berechnen</span><span class="card-tag">Zahl / Bruch</span></div>
+      <p class="question-text">Die Gerade <span class="math">\(g_1\)</span> hat die Steigung <span class="math">\(m_1=4\)</span>. Welche Steigung <span class="math">\(m_2\)</span> hat eine dazu orthogonale Gerade? Gib Brüche mithilfe der Taste / ein.</p>
+      <div class="input-wrapper"><input id="input-q5" class="text-input-field" readonly aria-label="Antwort Aufgabe 5" placeholder="Klicke die Tasten …"><div class="virtual-keyboard" data-target="input-q5"></div></div><div class="feedback-box" id="feedback-q5"></div>
+    </section>
+    <section class="card">
+      <div class="card-header"><span class="card-title">Aufgabe 6: Parallelenschar</span><span class="card-tag">Multiple Choice</span></div>
+      <p class="question-text">Gegeben ist die Parallelenschar <span class="math">\(g(t):y=0{,}5x+t\)</span>. Welcher Parameter unterscheidet die einzelnen Geraden der Schar voneinander?</p>
+      <div class="options-list">
+        <label class="option-label"><input type="radio" name="q6" value="m"><span>Die Steigung <span class="math">\(m\)</span></span></label>
+        <label class="option-label"><input type="radio" name="q6" value="t"><span>Der y-Achsenabschnitt <span class="math">\(t\)</span></span></label>
+        <label class="option-label"><input type="radio" name="q6" value="x"><span>Die x-Koordinate <span class="math">\(x\)</span></span></label>
+        <label class="option-label"><input type="radio" name="q6" value="y"><span>Der Funktionswert <span class="math">\(y\)</span></span></label>
+      </div><div class="feedback-box" id="feedback-q6"></div>
+    </section>
+    <section class="card">
+      <div class="card-header"><span class="card-title">Aufgabe 7: Fehlersuche</span><span class="card-tag">Mehrfachauswahl</span></div>
+      <p class="question-text"><strong>Welche Aussagen sind falsch?</strong> Kreuze alle falschen Aussagen an.</p>
+      <div class="options-list">
+        <label class="option-label"><input type="checkbox" name="q7" value="A"><span>Parallele Geraden haben stets denselben y-Achsenabschnitt <span class="math">\(t\)</span>.</span></label>
+        <label class="option-label"><input type="checkbox" name="q7" value="B"><span>Für zwei zueinander orthogonale Geraden gilt immer <span class="math">\(m_1\cdot m_2=1\)</span>.</span></label>
+        <label class="option-label"><input type="checkbox" name="q7" value="C"><span>Ursprungsgeraden schneiden die y-Achse immer im Punkt <span class="math">\(S_y(0\mid 0)\)</span>.</span></label>
+        <label class="option-label"><input type="checkbox" name="q7" value="D"><span>Bei der Schar <span class="math">\(g(t):y=2x+t\)</span> haben alle Geraden die Steigung <span class="math">\(m=2\)</span>.</span></label>
+      </div><div class="feedback-box" id="feedback-q7"></div>
+    </section>
+    <section class="card">
+      <div class="card-header"><span class="card-title">Aufgabe 8: Orthogonalitätsbedingung</span><span class="card-tag">Zahleneingabe</span></div>
+      <p class="question-text">Vervollständige die Formel für orthogonale Geraden: <span class="math">\(m_1\cdot m_2=\ ?\)</span> Welche Zahl steht rechts?</p>
+      <div class="input-wrapper"><input id="input-q8" class="text-input-field" readonly aria-label="Antwort Aufgabe 8" placeholder="Klicke die Tasten …"><div class="virtual-keyboard" data-target="input-q8"></div></div><div class="feedback-box" id="feedback-q8"></div>
+    </section>
+    <section class="card">
+      <div class="card-header"><span class="card-title">Aufgabe 9: Identische Steigungen</span><span class="card-tag">Ja / Nein</span></div>
+      <p class="question-text">Können zwei Geraden mit unterschiedlicher Steigung, also <span class="math">\(m_1\ne m_2\)</span>, parallel sein?</p>
+      <div class="options-list"><label class="option-label"><input type="radio" name="q9" value="ja"><span>Ja</span></label><label class="option-label"><input type="radio" name="q9" value="nein"><span>Nein</span></label></div><div class="feedback-box" id="feedback-q9"></div>
+    </section>
+    <section class="card">
+      <div class="card-header"><span class="card-title">Aufgabe 10: Orthogonalität prüfen</span><span class="card-tag">Ja / Nein</span></div>
+      <p class="question-text">Stehen die Geraden <span class="math">\(g_1:y=3x+4\)</span> und <span class="math">\(g_2:y=-\frac{1}{3}x+7\)</span> senkrecht aufeinander?</p>
+      <div class="options-list"><label class="option-label"><input type="radio" name="q10" value="ja"><span>Ja</span></label><label class="option-label"><input type="radio" name="q10" value="nein"><span>Nein</span></label></div><div class="feedback-box" id="feedback-q10"></div>
+    </section>
+    <div class="actions"><button type="button" class="btn-main" id="submit-btn">Antworten auswerten</button><button type="button" class="btn-secondary" id="reset-btn">Zurücksetzen</button></div>
+  </form>
+</div>
+<script>
+  // Virtuelle Tastatur für kurze, eindeutig bewertbare Zahleneingaben.
+  const keys = ['7','8','9','−','⌫','4','5','6',',','C','1','2','3','0','/'];
+  document.querySelectorAll('.virtual-keyboard').forEach(board => {
+    const target = document.getElementById(board.dataset.target);
+    keys.forEach(key => {
+      const button = document.createElement('button');
+      button.type = 'button'; button.className = 'key-btn' + (['⌫','C'].includes(key) ? ' action' : ''); button.textContent = key;
+      button.addEventListener('click', () => {
+        if (key === 'C') target.value = '';
+        else if (key === '⌫') target.value = target.value.slice(0, -1);
+        else if (target.value.length < 12) target.value += key === '−' ? '-' : key;
+      });
+      board.appendChild(button);
+    });
+  });
+  const chosen = name => document.querySelector('input[name="'+name+'"]:checked');
+  function evaluateQuiz(){
+    let score=0;
+    function feedback(n, ok, html){const box=document.getElementById('feedback-q'+n);box.className='feedback-box '+(ok?'correct':'incorrect');box.innerHTML=(ok?'<strong>Richtig!</strong> ':'<strong>Noch nicht richtig.</strong> ')+html;}
+    function mark(n,ok,yes,no){if(ok)score++;feedback(n,ok,ok?yes:no);}
+    mark(1,chosen('q1')?.value==='A','<span class="math">\\(y=4x\\)</span> hat keinen konstanten Summanden und verläuft durch den Ursprung.','Richtig ist <span class="math">\\(y=4x\\)</span>: Hier ist der y-Achsenabschnitt null.');
+    mark(2,chosen('q2')?.value==='B','Die Gerade verläuft parallel zur y-Achse. Sie ist keine Funktion.','Richtig: Die Gerade verläuft parallel zur y-Achse. Sie ist keine Funktion.');
+    mark(3,chosen('q3')?.value==='ja','Die Steigungen sind gleich: <span class="math">\\(0{,}2=\\frac15\\)</span>. Daher sind die Geraden parallel.','Ja. Es gilt <span class="math">\\(0{,}2=\\frac15\\)</span>, also sind die Steigungen gleich.');
+    const q4=document.getElementById('input-q4').value.trim().replace('−','-');
+    mark(4,q4==='0','Eine Parallele zur x-Achse hat die Steigung <span class="math">\\(m=0\\)</span>.','Die Steigung einer waagrechten Geraden ist <span class="math">\\(0\\)</span>.');
+    const q5=document.getElementById('input-q5').value.trim().replace(/\\s/g,'').replace('−','-').replace(',','.');
+    mark(5,['-1/4','-0.25'].includes(q5),'Es gilt <span class="math">\\(4m_2=-1\\)</span>, also <span class="math">\\(m_2=-\\frac14=-0{,}25\\)</span>.','Die orthogonale Steigung ist <span class="math">\\(-\\frac14\\)</span> beziehungsweise <span class="math">\\(-0{,}25\\)</span>.');
+    mark(6,chosen('q6')?.value==='t','Die Steigung bleibt fest; der y-Achsenabschnitt <span class="math">\\(t\\)</span> verändert sich.','Richtig ist der Parameter <span class="math">\\(t\\)</span>: Er gibt den veränderlichen y-Achsenabschnitt an.');
+    const q7=Array.from(document.querySelectorAll('input[name="q7"]:checked')).map(x=>x.value).sort().join('');
+    mark(7,q7==='AB','Falsch sind A und B. Parallele Geraden haben gleiche Steigung, aber im Allgemeinen unterschiedliche y-Achsenabschnitte; für Orthogonalität gilt <span class="math">\\(m_1m_2=-1\\)</span>.','Falsch sind A und B: Bei Parallelen ist die Steigung gleich, nicht notwendigerweise der y-Achsenabschnitt. Für Orthogonalität gilt <span class="math">\\(m_1m_2=-1\\)</span>.');
+    const q8=document.getElementById('input-q8').value.trim().replace('−','-');
+    mark(8,q8==='-1','Die Orthogonalitätsbedingung lautet <span class="math">\\(m_1m_2=-1\\)</span>.','Die gesuchte Zahl ist <span class="math">\\(-1\\)</span>.');
+    mark(9,chosen('q9')?.value==='nein','Parallele Geraden haben gleiche Steigungen.','Nein. Parallele Geraden müssen gleiche Steigungen haben: <span class="math">\\(m_1=m_2\\)</span>.');
+    mark(10,chosen('q10')?.value==='ja','Es gilt <span class="math">\\(3\\cdot\\left(-\\frac13\\right)=-1\\)</span>; die Geraden sind orthogonal.','Ja. Das Produkt der Steigungen ist <span class="math">\\(-1\\)</span>, daher sind die Geraden orthogonal.');
+    document.getElementById('summary-score').textContent=score+' / 10 Punkte';
+    document.getElementById('summary-text').textContent=score===10?'Hervorragend! Du beherrschst die Inhalte sicher.':score>=7?'Gute Leistung! Schau dir die Rückmeldungen zu den Aufgaben noch einmal an.':'Wiederhole die Merkmale besonderer Geraden und die Steigungsregeln.';
+    const summary=document.getElementById('summary-card');summary.style.display='block';
+    if(window.MathJax?.typesetPromise) window.MathJax.typesetPromise([document.getElementById('quiz-form')]);
+    summary.scrollIntoView({behavior:'smooth',block:'center'});
+  }
+  function resetQuiz(){document.getElementById('quiz-form').reset();document.querySelectorAll('.feedback-box').forEach(b=>{b.className='feedback-box';b.innerHTML=''});document.getElementById('summary-card').style.display='none';if(window.MathJax?.typesetPromise)window.MathJax.typesetPromise([document.getElementById('quiz-form')]);window.scrollTo({top:0,behavior:'smooth'});}
+  document.getElementById('submit-btn').addEventListener('click',evaluateQuiz);
+  document.getElementById('reset-btn').addEventListener('click',resetQuiz);
+</script>
+</body>
+</html>
